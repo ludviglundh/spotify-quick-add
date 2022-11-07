@@ -1,0 +1,26 @@
+{
+  "name": "spotify-quick-add",
+  "version": "1.0.0",
+  "main": "build/electron/main.js",
+  "author": "Ludvig Lundh",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "electron:dev": "concurrently -k \"BROWSER=none yarn start\" \"yarn assets\" \"wait-on tcp:3000 && tsc -p electron -w\" \"tsc -p electron && yarn electron \"",
+    "dev": "concurrently -k \"BROWSER=none yarn start\" \"yarn electron\"",
+    "assets": "copyfiles electron/assets/* build",
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.25",
+    "electron": "^21.2.2"
+  },
+  "dependencies": {
+    "concurrently": "^7.5.0",
+    "copyfiles": "^2.4.1",
+    "electron-is-dev": "^2.0.0",
+    "react": "^18.2.0",
+    "typescript": "^4.8.4",
+    "wait-on": "^6.0.1"
+  }
+}
