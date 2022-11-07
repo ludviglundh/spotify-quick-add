@@ -16,9 +16,9 @@ export class TrayBuilder {
     }
 
     const windowBounds = this.mainWindow.getBounds()
-    const {x, y, width, height} = windowBounds
-    const posX = Math.round(x + width / 2 - windowBounds.width / 2)
-    const posY = Math.round(y + height)
+    const {x, y, width} = windowBounds
+    const posX = Math.round(x + width - windowBounds.width)
+    const posY = Math.round(0)
 
     return {x: posX, y: posY}
   }
