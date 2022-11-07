@@ -1,4 +1,4 @@
-import {BrowserWindow, Menu, Tray} from 'electron'
+import { BrowserWindow, Menu, Tray } from 'electron'
 import * as path from 'path'
 
 export class TrayBuilder {
@@ -12,15 +12,15 @@ export class TrayBuilder {
 
   getWindowPosition = () => {
     if (this.mainWindow == null || this.tray == null) {
-      return;
+      return
     }
 
     const windowBounds = this.mainWindow.getBounds()
-    const {x, y, width} = windowBounds
+    const { x, width } = windowBounds
     const posX = Math.round(x + width - windowBounds.width)
     const posY = Math.round(0)
 
-    return {x: posX, y: posY}
+    return { x: posX, y: posY }
   }
 
   showWindow = () => {
@@ -41,7 +41,9 @@ export class TrayBuilder {
       return
     }
 
-    return this.mainWindow.isVisible() ? this.mainWindow.hide() : this.showWindow()
+    return this.mainWindow.isVisible()
+      ? this.mainWindow.hide()
+      : this.showWindow()
   }
 
   onRightClick = () => {
@@ -53,10 +55,11 @@ export class TrayBuilder {
       {
         role: 'quit',
         accelerator: 'Command+Q',
-        label: 'Quit App'
-      }
+        label: 'Quit App',
+      },
     ]
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.tray.popUpContextMenu(Menu.buildFromTemplate(menu as any))
   }
 

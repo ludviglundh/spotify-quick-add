@@ -1,8 +1,8 @@
-import { app, BrowserWindow } from 'electron';
-import * as isDev from 'electron-is-dev';
-import { TrayBuilder } from './TrayBuilder';
+import { app, BrowserWindow } from 'electron'
+import * as isDev from 'electron-is-dev'
+import { TrayBuilder } from './TrayBuilder'
 
-let mainWindow: BrowserWindow | null = null;
+let mainWindow: BrowserWindow | null = null
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
@@ -18,30 +18,32 @@ const createWindow = () => {
       nodeIntegration: true,
       backgroundThrottling: false,
     },
-  });
+  })
 
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${__dirname}/../index.html`);
+  mainWindow.loadURL(
+    isDev ? 'http://localhost:3000' : `file://${__dirname}/../index.html`
+  )
   if (isDev) {
-    mainWindow.webContents.openDevTools({ mode: 'detach' });
+    mainWindow.webContents.openDevTools({ mode: 'detach' })
   }
-};
+}
 
-let Tray = null;
+let Tray = null
 
 app.whenReady().then(() => {
-  createWindow();
-  Tray = new TrayBuilder(mainWindow);
-  Tray.build();
-});
+  createWindow()
+  Tray = new TrayBuilder(mainWindow)
+  Tray.build()
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit();
+    app.quit()
   }
-});
+})
 
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
+    createWindow()
   }
-});
+})
